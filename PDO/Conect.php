@@ -14,18 +14,12 @@
 class Conect {
     
     /*const SERVER        = 'mysql';
-    const HOST          = '192.168.1.3';
+    const HOST          = 'localhost';
     const DATA_BASE     = 'teste';
     const USER          = 'desenv';
     const PASS          = 'desenv';*/
     
-    
-    const SERVER        = 'mysql';
-    const HOST          = '200.155.11.2';
-    const DATA_BASE     = 'BCIAdmin';
-    const USER          = 'bci';
-    const PASS          = '6Bq(V~xs0S)';
-    
+      
     private static $conn = null;
 
     public function __construct(){}

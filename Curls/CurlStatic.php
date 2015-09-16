@@ -38,10 +38,10 @@ class CurlStatic {
             
             curl_setopt($ch, CURLOPT_CONNECTTIMEOUT , 0);
             //tempo maximo de requizição
-            curl_setopt($ch, CURLOPT_TIMEOUT , 6);
+            curl_setopt($ch, CURLOPT_TIMEOUT , 30 );
             //verificação http segura falsa
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, false);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, true);
             //verifico o tipo de envio
             if( $requestMethod === 'POST' || $requestMethod === 'PUT' ){
                 curl_setopt($ch, CURLOPT_URL, self::$baseUrl );
