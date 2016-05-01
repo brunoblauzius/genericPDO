@@ -1,9 +1,7 @@
 <?php
 
-require_once 'autoload.php';
-
 namespace DAO;
-
+require_once 'autoload.php';
 
 use DAO\AbstractDAO as AbstractDAO;
 
@@ -281,8 +279,8 @@ class DAO extends AbstractDAO {
             $stmt->execute();
 
             if (stripos($sql, 'SELECT') !== FALSE) {
-                $retorno = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-                if (!empty($retorno)) {
+                $retorno = $stmt->fetchAll(\PDO::FETCH_ASSOC);       
+                if ( count($retorno) > 0 ) {
                     $retorno = $this->findListModel($retorno);
                 } else {
                     $retorno = NULL;
@@ -326,7 +324,7 @@ class DAO extends AbstractDAO {
         $array = array();
         $arrayMaster = array();
         if(is_array($list) && !empty($list)){
-            
+           
             foreach ($list as $row) {
                 if (!is_numeric(key($row))) {
                     $array = $row;
