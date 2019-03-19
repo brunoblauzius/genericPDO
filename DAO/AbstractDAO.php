@@ -1,9 +1,8 @@
 <?php
 
-namespace DAO;
+namespace Model\DAO;
 
-
-use DAO\Conect as Conect;
+use Model\DAO\Conect;
 
 /**
  * Interface para crud's 
@@ -60,13 +59,13 @@ abstract class AbstractDAO {
     public function errorCode() {
         return $this->con->errorCode();
     }
-    
-    
-    abstract public function update( array $array = null, $primaryKey = 'id' );
-    abstract public function delete( $id = null );
-    abstract public function insert( array $array = NULL );
-    abstract public function find($type = 'all', array $params = array() );
-    abstract public function query( $sql );
-    abstract public function call( $sql );
-    
+
+
+    abstract public function query(string $sql);
+    abstract public function find(string $type = 'all', array $params = array() ) : array;
+    abstract public function call(string $sql) : array ;
+    abstract public function insert(array $array = NULL) : int;
+    abstract public function update(array $array = null, string $primaryKey = 'id') : int;
+    abstract public function delete(int $id = null) : bool;
+
 }

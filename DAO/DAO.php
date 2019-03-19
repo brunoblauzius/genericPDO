@@ -1,9 +1,8 @@
 <?php
 
-namespace DAO;
-require_once 'autoload.php';
+namespace Model\DAO;
 
-use DAO\AbstractDAO as AbstractDAO;
+use Model\DAO\AbstractDAO;
 
 /**
  * Classe que realiza CRUD'S genericos no banco de dados
@@ -70,7 +69,7 @@ class DAO extends AbstractDAO {
      * @param array $array preferenciamente o post ja validado
      * @return int id da tranxsação
      */
-    public final function insert(array $array = NULL) {
+    public final function insert(array $array = NULL) : int {
         try {
 
             $values = $this->prepareKeyValuesForExecute($array);
@@ -101,7 +100,7 @@ class DAO extends AbstractDAO {
      * @return Boolean 
      * @throws \PDOException
      */
-    public final function update(array $array = null, $primaryKey = 'id') {
+    public final function update(array $array = null, string $primaryKey = 'id') : int {
         try {
             if (!empty($array) && is_array($array)) {
 
@@ -140,7 +139,7 @@ class DAO extends AbstractDAO {
      * @return boolean
      * @throws Exception
      */
-    public final function delete($id = null) {
+    public final function delete(int $id = null) : bool {
         try {
 
             $sql = "DELETE FROM {$this->useTable} WHERE {$this->primaryKey} = :{$this->primaryKey}";
@@ -194,7 +193,7 @@ class DAO extends AbstractDAO {
         ));
      * 
      */
-    public function find($type = 'all', array $params = array() ){
+    public function find(string $type = 'all', array $params = array() ) : array {
         try {
             
             $condition = NULL;
@@ -267,9 +266,13 @@ class DAO extends AbstractDAO {
             throw $ex;
         }
     }
-    
 
-    public final function query($sql) {
+
+    /**
+     * @param string $sql
+     * @return array|null
+     */
+    public final function query(string $sql) {
         try {
             $retorno = NULL;
 
@@ -298,7 +301,12 @@ class DAO extends AbstractDAO {
         }
     }
 
-    public final function call($sql) {
+    /**
+     * @param string $sql
+     * @return array
+     * @throws \Exception
+     */
+    public final function call(string $sql) : array {
         try {
             $stmt = $this->getCon()->prepare($sql);
 
@@ -320,7 +328,7 @@ class DAO extends AbstractDAO {
      * @metodo que gera um cast no array e identifica o meu model
      * @param array $list
      */
-    public function findListModel( array $list = array() ) {
+    public function findListModel( array $list = [] ) : array {
         $array = array();
         $arrayMaster = array();
         if(is_array($list) && !empty($list)){
@@ -344,7 +352,7 @@ class DAO extends AbstractDAO {
      * @metodo que gera um cast no array e identifica o meu model
      * @param array $list
      */
-    public function inList(array $list = array()) {
+    public function inList( array $list = [] ) : array {
         $array = array();
         $arrayMaster = array();
         foreach ($list as $row) {
@@ -363,7 +371,7 @@ class DAO extends AbstractDAO {
      * @return boolean
      * @throws Exception
      */
-    private function checkArrayExists($key = null, array $array = array()) {
+    private function checkArrayExists(string $key = null, array $array = array()) : bool  {
         try {
             if (in_array($key, array_keys($array))) {
                 return TRUE;
